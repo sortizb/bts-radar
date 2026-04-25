@@ -18,7 +18,7 @@ async function sendTelegram(message) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) {
-    console.log('Telegram credentials not set. Skipping.');
+    console.log('Telegram credentials (TOKEN or CHAT_ID) not set. Skipping.');
     return;
   }
   try {
@@ -28,9 +28,13 @@ async function sendTelegram(message) {
       text: message,
       parse_mode: 'Markdown'
     });
-    console.log('Telegram notification sent.');
+    console.log('Telegram notification sent successfully.');
   } catch (error) {
-    console.error('Error sending Telegram notification:', error.message);
+    if (error.response) {
+      console.error(`Telegram API Error: ${error.response.status} - ${JSON.stringify(error.response.data)}`);
+    } else {
+      console.error('Error sending Telegram notification:', error.message);
+    }
   }
 }
 
