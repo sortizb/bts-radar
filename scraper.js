@@ -33,7 +33,7 @@ async function checkTickets() {
     const isSoldOut = content.includes('AGOTADO') || content.includes('Agotado');
     
     // Check for "COMPRAR" or "Tickets" buttons which might indicate availability
-    const hasBuyButton = content.includes('COMPRAR') || content.includes('Comprar') || content.includes('TICKETS');
+    const hasBuyButton = content.includes('COMPRAR') || content.includes('Comprar') || content.includes('TICKETS') || content.includes('ickets');
 
     console.log(`Scrape result: Sold Out = ${isSoldOut}, Has Buy Button = ${hasBuyButton}`);
 
