@@ -27,14 +27,17 @@ async function run() {
     console.log(`Current Status: ${currentStatus} (Previous: ${prevState.status})`);
     
     // 3. Compare and Notify
-    if (currentStatus !== prevState.status) {
+    const isInitialRun = prevState.status === 'UNKNOWN';
+    const statusChanged = currentStatus !== prevState.status;
+
+    if (statusChanged || isInitialRun) {
       let message = '';
       if (currentStatus === 'AVAILABLE') {
         message = '🚨 **BTS TICKETS MIGHT BE AVAILABLE!** 🚨\n\nGo check now: https://www.ticketmaster.co/event/bts-world-tour-2026';
-      } else if (currentStatus === 'SOLD_OUT' && prevState.status === 'AVAILABLE') {
+      } else if (currentStatus === 'SOLD_OUT' && !isInitialRun) {
         message = 'ℹ️ BTS tickets are sold out again.';
-      } else if (prevState.status === 'UNKNOWN') {
-        message = `🤖 Monitor started. Initial status: **${currentStatus}**`;
+      } else if (isInitialRun) {
+        message = `🤖 **Monitor Started Successfully!**\n\nInitial status: **${currentStatus}**\nInterval: ~5-10 minutes (GitHub Schedule)`;
       }
       
       if (message) {
@@ -43,12 +46,17 @@ async function run() {
           sendTelegram(message)
         ]);
       }
-      
-      // 4. Update state
-      fs.writeFileSync(STATE_FILE, JSON.stringify({ status: currentStatus, lastUpdate: new Date().toISOString() }));
     } else {
-      console.log('No change in status. No notification sent.');
+      console.log('No status change detected.');
     }
+    
+    // 4. Always update state (Heartbeat)
+    console.log('Updating heartbeat in state.json...');
+    fs.writeFileSync(STATE_FILE, JSON.stringify({ 
+      status: currentStatus, 
+      lastUpdate: new Date().toISOString(),
+      lastCheckSuccessful: true
+    }, null, 2));
     
   } catch (error) {
     console.error('Fatal error in run loop:', error);
