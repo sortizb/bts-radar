@@ -33,11 +33,11 @@ async function run() {
     if (statusChanged || isInitialRun) {
       let message = '';
       if (currentStatus === 'AVAILABLE') {
-        message = '🚨 **BTS TICKETS MIGHT BE AVAILABLE!** 🚨\n\nGo check now: https://www.ticketmaster.co/event/bts-world-tour-2026';
+        message = '🚨 <b>BTS TICKETS MIGHT BE AVAILABLE!</b> 🚨\n\nGo check now: https://www.ticketmaster.co/event/bts-world-tour-2026';
       } else if (currentStatus === 'SOLD_OUT' && !isInitialRun) {
         message = 'ℹ️ BTS tickets are sold out again.';
       } else if (isInitialRun) {
-        message = `🤖 **Monitor Started Successfully!**\n\nInitial status: **${currentStatus}**\nInterval: ~5-10 minutes (GitHub Schedule)`;
+        message = `🤖 <b>Monitor Started Successfully!</b>\n\nInitial status: <b>${currentStatus}</b>\nInterval: ~5-10 minutes (GitHub Schedule)`;
       }
       
       if (message) {
