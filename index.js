@@ -51,22 +51,22 @@ async function run() {
 
     if (changes.length > 0 || isInitialRun) {
       let message = '';
-      const formatCat = (str) => str.replace(/_/g, '\\_');
+      const esc = (str) => str ? str.replace(/_/g, '\\_') : '';
 
       if (isInitialRun) {
         message = '🤖 **Monitor Started Successfully!**\n\n' +
-                  categories.filter(c => !c.endsWith('_LINK')).map(cat => `• ${formatCat(cat)}: **${currentResults[cat]}**`).join('\n') +
+                  categories.filter(c => !c.endsWith('_LINK')).map(cat => `• ${esc(cat)}: **${esc(currentResults[cat])}**`).join('\n') +
                   '\n\nInterval: ~5-10 minutes (GitHub Schedule)';
       } else {
-        const changeLogs = changes.filter(ch => !ch.category.endsWith('_LINK')).map(ch => `• ${formatCat(ch.category)}: **${ch.from}** → **${ch.to}**`).join('\n');
-
+        const changeLogs = changes.filter(ch => !ch.category.endsWith('_LINK')).map(ch => `• ${esc(ch.category)}: **${esc(ch.from)}** → **${esc(ch.to)}**`).join('\n');
+        
         if (availableNow.length > 0) {
           message = '🚨 **TICKET AVAILABILITY CHANGE!** 🚨\n\n' +
                     changeLogs +
                     '\n\n🔥 **AVAILABLE NOW:**\n' +
                     availableNow.map(a => {
                       const link = currentResults[`${a}_LINK`];
-                      return `👉 **${formatCat(a)}**\n   [Click here to buy](${link})`;
+                      return `👉 **${esc(a)}**\n   [Click here to buy](${link})`;
                     }).join('\n') +
                     '\n\nMain page: https://www.ticketmaster.co/event/bts-world-tour-2026';
         } else {
