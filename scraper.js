@@ -14,13 +14,18 @@ async function checkTickets() {
   
   try {
     console.log('Navigating to Ticketmaster...');
-    await page.goto('https://www.ticketmaster.co/event/bts-world-tour-2026', {
-      waitUntil: 'networkidle',
-      timeout: 60000
-    });
+    try {
+      await page.goto('https://www.ticketmaster.co/event/bts-world-tour-2026', {
+        waitUntil: 'domcontentloaded', // Much more reliable than networkidle
+        timeout: 60000
+      });
+    } catch (gotoError) {
+      console.warn('Initial navigation timeout/error, attempting to proceed anyway...', gotoError.message);
+    }
 
-    // Wait for the main content to load
-    await page.waitForTimeout(5000); // Give it extra time for dynamic elements
+    // Wait for the dynamic content to actually render
+    console.log('Waiting for content to render...');
+    await page.waitForTimeout(10000); // 10 seconds is safer for Ticketmaster's JS
 
     const content = await page.content();
     
