@@ -18,10 +18,10 @@ async function checkTickets() {
   });
 
   const results = {
-    'ARMY_02_10': 'SOLD_OUT',
-    'GENERAL_02_10': 'SOLD_OUT',
-    'ARMY_03_10': 'SOLD_OUT',
-    'GENERAL_03_10': 'SOLD_OUT'
+    'ARMY_02_10': 'UNKNOWN',
+    'GENERAL_02_10': 'UNKNOWN',
+    'ARMY_03_10': 'UNKNOWN',
+    'GENERAL_03_10': 'UNKNOWN'
   };
 
   try {
@@ -84,7 +84,6 @@ async function checkTickets() {
     });
 
     console.log('Scrape final results:', results);
-    console.log('Scrape results:', results);
 
     await browser.close();
     return results;
