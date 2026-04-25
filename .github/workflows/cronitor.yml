@@ -1,20 +1,16 @@
 name: Cronitor Monitoring Relay
-
 on:
   workflow_run:
-    workflows: ['*']
-    types: [requested,completed]
+    workflows: ['BTS Ticket Monitor']
+    types: [requested, completed]
 
 jobs:
   send-telemetry:
     runs-on: ubuntu-latest
-    name: Send Telemetry
     steps:
-      - name: Send execution details to the Cronitor for Github Actions agent
-        uses: cronitorio/monitor-github-actions@v7
+      - name: Send telemetry to Cronitor
+        uses: cronitorio/monitor-github-actions@v8
         with:
           event: ${{ toJSON(github.event) }}
-          github_token: ${{ secrets.G_TOKEN }}
           cronitor_key: ${{ secrets.CRONITOR_API_KEY }}
-          cronitor_group: actions
-          cronitor_notify: default
+          github_token: ${{ secrets.G_TOKEN }}
