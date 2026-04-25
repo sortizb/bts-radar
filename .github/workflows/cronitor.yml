@@ -14,7 +14,7 @@ jobs:
         uses: cronitorio/monitor-github-actions@v7
         with:
           event: ${{ toJSON(github.event) }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.G_TOKEN }}
           cronitor_key: ${{ secrets.CRONITOR_API_KEY }}
           cronitor_group: actions
           cronitor_notify: default
