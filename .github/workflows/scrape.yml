@@ -1,9 +1,9 @@
 name: BTS Ticket Monitor
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
+  repository_dispatch:
+    types: [cronitor_ping]
 
 # Grant permission to push changes back to the repo
 permissions:
