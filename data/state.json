@@ -1,15 +1,11 @@
 {
   "status": "MONITORING",
   "results": {
-    "ARMY_02_10": "SOLD_OUT",
-    "GENERAL_02_10": "SOLD_OUT",
-    "ARMY_03_10": "SOLD_OUT",
-    "GENERAL_03_10": "SOLD_OUT",
-    "ARMY_02_10_LINK": "https://www.ticketmaster.co/event/bts-world-tour-army-membership-viernes-2-octubre",
-    "GENERAL_02_10_LINK": "https://www.ticketmaster.co/event/bts-world-tour-venta-general-viernes-2-octubre",
-    "ARMY_03_10_LINK": "https://www.ticketmaster.co/event/bts-world-tour-army-membership-sabado-3-octubre",
-    "GENERAL_03_10_LINK": "https://www.ticketmaster.co/event/bts-world-tour-venta-general-sabado-3-octubre"
+    "ARMY_02_10": "UNKNOWN",
+    "GENERAL_02_10": "UNKNOWN",
+    "ARMY_03_10": "UNKNOWN",
+    "GENERAL_03_10": "UNKNOWN"
   },
-  "lastUpdate": "2026-06-25T13:53:39.860Z",
+  "lastUpdate": "2026-06-25T13:54:58.125Z",
   "lastCheckSuccessful": true
 }
